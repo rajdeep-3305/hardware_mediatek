@@ -9,10 +9,8 @@
 #include <log/log.h>
 
 int perf_lock_acq(int hdl, int dur, long num, unsigned int tid) {
-    ALOGI("[%s] hdl: %d, dur: %d, num: %ld, tid: %u",
-            __func__, hdl, dur, num, tid);
-    if (hdl > 0)
-        return hdl;
+    ALOGI("[%s] hdl: %d, dur: %d, num: %ld, tid: %u", __func__, hdl, dur, num, tid);
+    if (hdl > 0) return hdl;
 
     return 233;
 }
