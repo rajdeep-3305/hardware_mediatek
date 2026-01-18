@@ -17,10 +17,11 @@ Return<void> MtkPowerCallback::mtkPowerHint(int32_t /* hint */, int32_t /* durat
     return Void();
 }
 
-Return<void> MtkPowerCallback::notifyAppState(const hidl_string& /* pack */, const hidl_string& /* act */, int32_t /* pid */, int32_t /* state */, int32_t /* uid */) {
+Return<void> MtkPowerCallback::notifyAppState(const hidl_string& /* pack */,
+                                              const hidl_string& /* act */, int32_t /* pid */,
+                                              int32_t /* state */, int32_t /* uid */) {
     return Void();
 }
-
 
 // Methods from ::vendor::mediatek::hardware::mtkpower::V1_2::IMtkPowerCallback follow.
 Return<void> MtkPowerCallback::notifyScnUpdate(int32_t /* hint */, int32_t /* data */) {

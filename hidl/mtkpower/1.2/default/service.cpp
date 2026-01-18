@@ -9,8 +9,8 @@
 #include <android-base/logging.h>
 #include <hidl/HidlTransportSupport.h>
 
-#include "MtkPower.h"
 #include "MtkPerf.h"
+#include "MtkPower.h"
 
 using android::OK;
 using android::sp;
@@ -18,11 +18,11 @@ using android::status_t;
 using android::hardware::configureRpcThreadpool;
 using android::hardware::joinRpcThreadpool;
 
-using vendor::mediatek::hardware::mtkpower::V1_2::IMtkPower;
 using vendor::mediatek::hardware::mtkpower::V1_2::IMtkPerf;
+using vendor::mediatek::hardware::mtkpower::V1_2::IMtkPower;
 
-using vendor::mediatek::hardware::mtkpower::implementation::MtkPower;
 using vendor::mediatek::hardware::mtkpower::implementation::MtkPerf;
+using vendor::mediatek::hardware::mtkpower::implementation::MtkPower;
 
 int main() {
     configureRpcThreadpool(1, true /*callerWillJoin*/);
