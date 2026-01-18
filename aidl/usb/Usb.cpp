@@ -176,7 +176,7 @@ Status queryMoistureDetectionStatus(std::vector<PortStatus>* currentPortStatus) 
     return Status::SUCCESS;
 }
 
-Status queryNonCompliantChargerStatus(std::vector<PortStatus> *currentPortStatus) {
+Status queryNonCompliantChargerStatus(std::vector<PortStatus>* currentPortStatus) {
     string reasons, path;
 
     for (int i = 0; i < currentPortStatus->size(); i++) {
@@ -580,8 +580,7 @@ Status getPortStatusHelper(android::hardware::usb::Usb* usb,
                   "usbDataEnabled:%d plugOrientation:%d",
                   i, port.first.c_str(), port.second, (*currentPortStatus)[i].canChangeMode,
                   (*currentPortStatus)[i].canChangeDataRole,
-                  (*currentPortStatus)[i].canChangePowerRole,
-                  usb->mUsbDataEnabled,
+                  (*currentPortStatus)[i].canChangePowerRole, usb->mUsbDataEnabled,
                   (*currentPortStatus)[i].plugOrientation);
         }
     } else {

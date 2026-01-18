@@ -29,21 +29,19 @@ using ::android::hardware::configureRpcThreadpool;
 using ::android::hardware::joinRpcThreadpool;
 
 int main(int /* argc */, char** /* argv */) {
-  ALOGI("Bluetooth HAL starting");
-  if (!ABinderProcess_setThreadPoolMaxThreadCount(0)) {
-    ALOGI("failed to set thread pool max thread count");
-    return 1;
-  }
+    ALOGI("Bluetooth HAL starting");
+    if (!ABinderProcess_setThreadPoolMaxThreadCount(0)) {
+        ALOGI("failed to set thread pool max thread count");
+        return 1;
+    }
 
-  std::shared_ptr<BluetoothHci> service =
-      ndk::SharedRefBase::make<BluetoothHci>();
-  std::string instance = std::string() + BluetoothHci::descriptor + "/default";
-  auto result =
-      AServiceManager_addService(service->asBinder().get(), instance.c_str());
-  if (result == STATUS_OK) {
-    ABinderProcess_joinThreadPool();
-  } else {
-    ALOGE("Could not register as a service!");
-  }
-  return 0;
+    std::shared_ptr<BluetoothHci> service = ndk::SharedRefBase::make<BluetoothHci>();
+    std::string instance = std::string() + BluetoothHci::descriptor + "/default";
+    auto result = AServiceManager_addService(service->asBinder().get(), instance.c_str());
+    if (result == STATUS_OK) {
+        ABinderProcess_joinThreadPool();
+    } else {
+        ALOGE("Could not register as a service!");
+    }
+    return 0;
 }

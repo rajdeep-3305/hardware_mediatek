@@ -32,49 +32,46 @@ class BluetoothDeathRecipient;
 
 // This Bluetooth HAL implementation connects with a serial port at dev_path_.
 class BluetoothHci : public BnBluetoothHci {
- public:
-  BluetoothHci(const std::string& dev_path = "/dev/hvc5");
+  public:
+    BluetoothHci(const std::string& dev_path = "/dev/hvc5");
 
-  ndk::ScopedAStatus initialize(
-      const std::shared_ptr<IBluetoothHciCallbacks>& cb) override;
+    ndk::ScopedAStatus initialize(const std::shared_ptr<IBluetoothHciCallbacks>& cb) override;
 
-  ndk::ScopedAStatus sendHciCommand(
-      const std::vector<uint8_t>& packet) override;
+    ndk::ScopedAStatus sendHciCommand(const std::vector<uint8_t>& packet) override;
 
-  ndk::ScopedAStatus sendAclData(const std::vector<uint8_t>& packet) override;
+    ndk::ScopedAStatus sendAclData(const std::vector<uint8_t>& packet) override;
 
-  ndk::ScopedAStatus sendScoData(const std::vector<uint8_t>& packet) override;
+    ndk::ScopedAStatus sendScoData(const std::vector<uint8_t>& packet) override;
 
-  ndk::ScopedAStatus sendIsoData(const std::vector<uint8_t>& packet) override;
+    ndk::ScopedAStatus sendIsoData(const std::vector<uint8_t>& packet) override;
 
-  ndk::ScopedAStatus close() override;
+    ndk::ScopedAStatus close() override;
 
-  static void OnPacketReady();
+    static void OnPacketReady();
 
-  static BluetoothHci* get();
+    static BluetoothHci* get();
 
- private:
-  std::shared_ptr<IBluetoothHciCallbacks> mCb = nullptr;
+  private:
+    std::shared_ptr<IBluetoothHciCallbacks> mCb = nullptr;
 
-  std::shared_ptr<::android::hardware::bluetooth::hci::H4Protocol> mH4;
+    std::shared_ptr<::android::hardware::bluetooth::hci::H4Protocol> mH4;
 
-  std::shared_ptr<BluetoothDeathRecipient> mDeathRecipient;
+    std::shared_ptr<BluetoothDeathRecipient> mDeathRecipient;
 
-  std::string mDevPath;
+    std::string mDevPath;
 
-  int getFdFromDevPath();
-  [[nodiscard]] ndk::ScopedAStatus send(
-      ::android::hardware::bluetooth::hci::PacketType type,
-      const std::vector<uint8_t>& packet);
+    int getFdFromDevPath();
+    [[nodiscard]] ndk::ScopedAStatus send(::android::hardware::bluetooth::hci::PacketType type,
+                                          const std::vector<uint8_t>& packet);
 
-  // Don't close twice or open before close is complete
-  std::mutex mStateMutex;
-  enum class HalState {
-    READY,
-    INITIALIZING,
-    ONE_CLIENT,
-    CLOSING,
-  } mState{HalState::READY};
+    // Don't close twice or open before close is complete
+    std::mutex mStateMutex;
+    enum class HalState {
+        READY,
+        INITIALIZING,
+        ONE_CLIENT,
+        CLOSING,
+    } mState{HalState::READY};
 };
 
 }  // namespace aidl::android::hardware::bluetooth::impl
