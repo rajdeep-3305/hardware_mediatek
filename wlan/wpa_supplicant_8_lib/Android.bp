@@ -9,7 +9,6 @@ cc_library_static {
     sanitize: {
         cfi: true,
     },
-    cflags: ["-DCONFIG_MTK_P2P_SIGMA"],
     srcs: ["mediatek_driver_cmd_nl80211.c"],
     shared_libs: [
         "libc",
