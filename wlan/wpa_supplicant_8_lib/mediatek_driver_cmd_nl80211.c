@@ -16,6 +16,7 @@
 #endif
 
 #include "driver_i.h"
+#undef BITS
 #include "mediatek_driver_nl80211.h"
 
 #include "p2p/p2p_i.h"
